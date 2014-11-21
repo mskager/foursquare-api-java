@@ -113,6 +113,27 @@ public class FoursquareApi {
     this.oAuthToken = oAuthToken;
     this.ioHandler = ioHandler;
   }
+  
+  /**
+   * Constructor.
+   *
+   * @param clientId Foursquare Client id
+   * @param clientSecret Foursquare Client secret
+   * @param redirectUrl Foursquare Redirect URL
+   * @param oAuthToken Previously retrieved OAuthToken
+   * @param ioHandler IOHandler
+   * @param apiUrl Foursquare API URL
+   */
+  public FoursquareApi(String clientId, String clientSecret, String redirectUrl, String oAuthToken, IOHandler ioHandler, String apiUrl) {
+    this.clientId = clientId;
+    this.clientSecret = clientSecret;
+    this.redirectUrl = redirectUrl;
+    this.oAuthToken = oAuthToken;
+    this.ioHandler = ioHandler;
+    
+    if (apiUrl != null && !apiUrl.isEmpty())
+      this.apiUrl = apiUrl;
+  }
 
   /**
    * Returns OAuthToken
@@ -1770,7 +1791,7 @@ public class FoursquareApi {
   private IOHandler ioHandler;
   private String version = DEFAULT_VERSION;
   private boolean useCallback = true;
-  private static final String apiUrl = "https://api.foursquare.com/v2/";
+  private String apiUrl = "https://api.foursquare.com/v2/";
 
   /**
    * Class that holds API request response

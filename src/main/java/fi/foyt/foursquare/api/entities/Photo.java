@@ -26,21 +26,6 @@ public class Photo extends CompactPhoto implements FoursquareEntity {
 
   private static final long serialVersionUID = -6641038454071667700L;
 
-  private String id;
-  private Long createdAt;
-  private String url;
-  private SizeGroup sizes;
-  private Source source;
-  private CompactUser user;
-  private CompactVenue venue;
-  private CompleteTip tip;
-  private Checkin checkin;
-  private Integer height;
-  private Integer width;
-  private String visibility;
-  private String prefix;
-  private String suffix;
-
   /**
    * Returns photo's id
    * 
@@ -115,37 +100,15 @@ public class Photo extends CompactPhoto implements FoursquareEntity {
     return checkin;
   }
   
-  /**
-   */
-  public Integer getHeight() {
-    return height;
-  }
-  
-  /**
-   */
-  public Integer getWidth() {
-    return width;
-  }
-  
-  /**
-   */
-  public String getVisibility() {
-    return visibility;
-  }
-  
-  /**
-   */
-  public String getPrefix() {
-    return prefix;
-  }
-  
-  /**
-   */
-  public String getSuffix() {
-    return suffix;
-  }
+  private String id;
+  private Long createdAt;
+  private String url;
+  private SizeGroup sizes;
+  private Source source;
+  private CompactUser user;
+  private CompactVenue venue;
+  private CompleteTip tip;
+  private Checkin checkin;
 
-  
 
-  
 }

@@ -15,6 +15,8 @@ package fi.foyt.foursquare.api.entities;
 
 import fi.foyt.foursquare.api.FoursquareEntity;
 
+import java.util.Arrays;
+
 /**
  * Class representing Category entity
  * 
@@ -56,7 +58,7 @@ public class Category implements FoursquareEntity {
    * 
    * @return icon
    */
-  public String getIcon() {
+  public Icon getIcon() {
     return icon;
   }
 
@@ -90,11 +92,25 @@ public class Category implements FoursquareEntity {
   private String id;
   private String name;
   private String pluralName;
-  private String icon;
+  private Icon icon;
   private String[] parents;
   private Boolean primary;
   private Category[] categories;
   
   // TODO
   private String shortName;
+
+  @Override
+  public String toString() {
+    return "Category{" +
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            ", pluralName='" + pluralName + '\'' +
+            ", icon='" + icon + '\'' +
+            ", parents=" + Arrays.toString(parents) +
+            ", primary=" + primary +
+            ", categories=" + Arrays.toString(categories) +
+            ", shortName='" + shortName + '\'' +
+            '}';
+  }
 }

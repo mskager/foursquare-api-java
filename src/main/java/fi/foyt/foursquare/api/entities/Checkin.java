@@ -4,7 +4,7 @@
  * http://www.foyt.fi
  * Copyright (C) 2014 - Blake Dy / Wallaby
  * http://walla.by
- * 
+ *
  * License: 
  * 
  * Licensed under GNU Lesser General Public License Version 3 or later (the "LGPL")
@@ -78,15 +78,6 @@ public class Checkin implements FoursquareEntity {
    */
   public String getTimeZone() {
     return timeZone;
-  }
-  
-  /**
-   * Returns timezone offset of the checkin
-   * 
-   * @return timezone offset of the checkin
-   */
-  public Integer getTimeZoneOffset() {
-    return timeZoneOffset;
   }
   
   /**
@@ -179,7 +170,6 @@ public class Checkin implements FoursquareEntity {
   private CompactUser user;
   private Boolean isMayor;
   private String timeZone;
-  private Integer timeZoneOffset;
   private CompleteVenue venue;
   private Location location;
   private String shout;
@@ -188,11 +178,24 @@ public class Checkin implements FoursquareEntity {
   private PhotoGroup photos;
   private CommentGroup comments;
   private CheckinGroup overlaps;
-  
-  // TODO
-  private String posts;
-  private String score;
-  private String likes;
-  private String like;
-  private String replies;
+
+  @Override
+  public String toString() {
+    return "Checkin{" +
+            "id='" + id + '\'' +
+            ", type='" + type + '\'' +
+            ", isPrivate=" + isPrivate +
+            ", user=" + user +
+            ", isMayor=" + isMayor +
+            ", timeZone='" + timeZone + '\'' +
+            ", venue=" + venue +
+            ", location=" + location +
+            ", shout='" + shout + '\'' +
+            ", createdAt=" + createdAt +
+            ", source=" + source +
+            ", photos=" + photos +
+            ", comments=" + comments +
+            ", overlaps=" + overlaps +
+            '}';
+  }
 }

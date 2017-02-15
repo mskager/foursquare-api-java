@@ -30,7 +30,17 @@ local.properties
 
 /target/*
 /target/
+.directory
 
-#### Idea
-.idea/
-foursquare-api.iml
+# Intellij
+.idea
+.idea/copyright
+.idea/libraries
+.idea/scopes
+.idea/.name
+.idea/*.xml
+*.iml
+*.ipr
+*.iws
+out/
+.idea_modules/

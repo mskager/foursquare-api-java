@@ -27,16 +27,14 @@ public class CompactUser implements FoursquareEntity {
   private static final long serialVersionUID = 477096997911461087L;
 
 
-  private String id;
-  private String firstName;
-  private String lastName;
-  private String homeCity;
-  private CompactPhoto photo;
-  private String gender;
-  private String relationship;
-
-  // TODO
-  private String type;
+  protected String id;
+  protected String firstName;
+  protected String lastName;
+  protected String homeCity;
+  protected CompactPhoto photo;
+  protected String gender;
+  protected String relationship;
+  protected String type;
 
   /**
    * Returns user's id
@@ -100,6 +98,18 @@ public class CompactUser implements FoursquareEntity {
   public String getRelationship() {
     return relationship;
   }
-  
 
+  @Override
+  public String toString() {
+    return "CompactUser{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", homeCity='" + homeCity + '\'' +
+            ", photo='" + photo + '\'' +
+            ", gender='" + gender + '\'' +
+            ", relationship='" + relationship + '\'' +
+            ", type='" + type + '\'' +
+            '}';
+  }
 }

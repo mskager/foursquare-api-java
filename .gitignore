@@ -30,3 +30,7 @@ local.properties
 
 /target/*
 /target/
+
+#### Idea
+.idea/
+foursquare-api.iml

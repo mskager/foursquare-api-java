@@ -22,9 +22,24 @@ import fi.foyt.foursquare.api.FoursquareEntity;
  * 
  * @author Antti Leppä / Blake Dy
  */
-public class Photo implements FoursquareEntity {
+public class Photo extends CompactPhoto implements FoursquareEntity {
 
   private static final long serialVersionUID = -6641038454071667700L;
+
+  private String id;
+  private Long createdAt;
+  private String url;
+  private SizeGroup sizes;
+  private Source source;
+  private CompactUser user;
+  private CompactVenue venue;
+  private CompleteTip tip;
+  private Checkin checkin;
+  private Integer height;
+  private Integer width;
+  private String visibility;
+  private String prefix;
+  private String suffix;
 
   /**
    * Returns photo's id
@@ -44,14 +59,7 @@ public class Photo implements FoursquareEntity {
     return createdAt;
   }
   
-  /**
-   * Returns the url for the original uploaded file.
-   * 
-   * @return the url for the original uploaded file.
-   */
-  public String getUrl() {
-    return this.getPrefix() + "original" + this.getSuffix();
-  }
+
   
   /**
    * Returns image sizes
@@ -136,56 +144,8 @@ public class Photo implements FoursquareEntity {
   public String getSuffix() {
     return suffix;
   }
+
   
-  private String id;
-  private Long createdAt;
-  private String url;
-  private SizeGroup sizes;
-  private Source source;
-  private CompactUser user;
-  private CompactVenue venue;
-  private CompleteTip tip;
-  private Checkin checkin;
-  private Integer height;
-  private Integer width;
-  private String visibility;
-  private String prefix;
-  private String suffix;
-  
-  /**
-   * Returns the url for the original uploaded file forcing XXxYY scale.
-   * 
-   * @return the url for the original uploaded file forcing XXxYY scale.
-   */
-  public String getUrlXXxYY(Integer xx, Integer yy) {
-    return this.getPrefix() + xx.toString() + "x" + yy.toString() + this.getSuffix();
-  }
-  
-  /**
-   * Returns the url for the original uploaded file capping the photo with a width or height of XX (whichever is larger). Scales the other, smaller dimension proportionally.
-   * 
-   * @return the url for the original uploaded file capping the photo with a width or height of XX (whichever is larger). Scales the other, smaller dimension proportionally.
-   */
-  public String getUrlCapXX(Integer xx) {
-    return this.getPrefix() + "cap" + xx.toString() + this.getSuffix();
-  }
-  
-  /**
-   * Returns the url for the original uploaded file forcing the width to be XX and scales the height proportionally.
-   * 
-   * @return the url for the original uploaded file forcing the width to be XX and scales the height proportionally.
-   */
-  public String getUrlWidthXX(Integer xx) {
-    return this.getPrefix() + "width" + xx.toString() + this.getSuffix();
-  }
-  
-  /**
-   * Returns the url for the original uploaded file forcing the height to be YY and scales the width proportionally.
-   * 
-   * @return the url for the original uploaded file forcing the height to be YY and scales the width proportionally.
-   */
-  public String getUrlHeightYY(Integer yy) {
-    return this.getPrefix() + "height" + yy.toString() + this.getSuffix();
-  }
+
   
 }

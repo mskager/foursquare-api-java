@@ -3,7 +3,7 @@
 	<groupId>fi.foyt</groupId>
 	<artifactId>foursquare-api</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.4.2-RELEASE</version>
+	<version>1.0.4.3-SNAPSHOT</version>
 	<name>Foursquare API</name>
 	<licenses>
 		<license>

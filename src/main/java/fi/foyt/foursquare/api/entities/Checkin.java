@@ -52,7 +52,10 @@ public class Checkin implements FoursquareEntity {
   public Boolean isPrivate() {
     return isPrivate;
   }
-  
+  public Boolean getIsPrivate() {
+    return isPrivate;
+  }
+
   /**
    * Returns user who checked in 
    * 

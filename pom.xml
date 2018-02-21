@@ -34,9 +34,7 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>1.9.22</version>
-			<!-- not required by typical or Android usage. see https://github.com/clinejj/foursquare-api-java/issues/1 -->
-			<optional>true</optional>
+			<version>1.6.5</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

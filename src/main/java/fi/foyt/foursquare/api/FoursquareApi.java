@@ -72,7 +72,7 @@ import fi.foyt.foursquare.api.io.Response;
  */
 public class FoursquareApi {
 
-  private static final String DEFAULT_VERSION = "20140131";
+  private static final String DEFAULT_VERSION = "20161210";
 
   /**
    * Constructor.

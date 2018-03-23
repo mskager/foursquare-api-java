@@ -73,6 +73,7 @@ import fi.foyt.foursquare.api.io.Response;
 public class FoursquareApi {
 
   private static final String DEFAULT_VERSION = "20161210";
+  private static String API_URL = "https://api.foursquare.com/v2/";
 
   /**
    * Constructor.
@@ -86,6 +87,16 @@ public class FoursquareApi {
   }
 
   /**
+   * Constructor for Debug mode
+   */
+  public FoursquareApi(String clientId, String clientSecret, String redirectUrl, boolean debug) {
+    this(clientId, clientSecret, redirectUrl, new DefaultIOHandler());
+    if (debug) {
+      API_URL = "http://localhost:3000/";
+    }
+  }
+
+  /**
    * Constructor.
    *
    * @param clientId Foursquare Client id
@@ -96,6 +107,7 @@ public class FoursquareApi {
   public FoursquareApi(String clientId, String clientSecret, String redirectUrl, IOHandler ioHandler) {
     this(clientId, clientSecret, redirectUrl, null, ioHandler);
   }
+
 
   /**
    * Constructor.
@@ -1770,7 +1782,7 @@ public class FoursquareApi {
   private IOHandler ioHandler;
   private String version = DEFAULT_VERSION;
   private boolean useCallback = true;
-  private static final String apiUrl = "https://api.foursquare.com/v2/";
+  private static String apiUrl = API_URL;
 
   /**
    * Class that holds API request response

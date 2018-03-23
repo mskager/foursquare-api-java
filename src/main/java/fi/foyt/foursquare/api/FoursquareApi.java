@@ -967,27 +967,27 @@ public class FoursquareApi {
    * @return
    */
   private Result<VenuesSearchResult> handleVenueSearchResult(ApiRequestResponse response) throws FoursquareApiException, JSONException {
-	  VenuesSearchResult result = null;
+    VenuesSearchResult result = null;
 
-      if (response.getMeta().getCode() == 200) {
-        CompactVenue[] venues = null;
-        VenueGroup[] groups = null;
-        GeoCode geocode = null;
-        if (response.getResponse().has("groups")) {
-          groups = (VenueGroup[]) JSONFieldParser.parseEntities(VenueGroup.class, response.getResponse().getJSONArray("groups"), this.skipNonExistingFields);
-        }
-
-        if (response.getResponse().has("venues")) {
-          venues = (CompactVenue[]) JSONFieldParser.parseEntities(CompactVenue.class, response.getResponse().getJSONArray("venues"), this.skipNonExistingFields);
-        }
-
-        if(response.getResponse().has("geocode")) {
-        	geocode = (GeoCode) JSONFieldParser.parseEntity(GeoCode.class, response.getResponse().getJSONObject("geocode"), this.skipNonExistingFields);
-        }
-        result = new VenuesSearchResult(venues, groups,geocode);
+    if (response.getMeta().getCode() == 200) {
+      CompactVenue[] venues = null;
+      VenueGroup[] groups = null;
+      GeoCode geocode = null;
+      if (response.getResponse().has("groups")) {
+        groups = (VenueGroup[]) JSONFieldParser.parseEntities(VenueGroup.class, response.getResponse().getJSONArray("groups"), this.skipNonExistingFields);
       }
 
-      return new Result<VenuesSearchResult>(response.getMeta(), result);
+      if (response.getResponse().has("venues")) {
+        venues = (CompactVenue[]) JSONFieldParser.parseEntities(CompactVenue.class, response.getResponse().getJSONArray("venues"), this.skipNonExistingFields);
+      }
+
+      if(response.getResponse().has("geocode")) {
+        geocode = (GeoCode) JSONFieldParser.parseEntity(GeoCode.class, response.getResponse().getJSONObject("geocode"), this.skipNonExistingFields);
+      }
+      result = new VenuesSearchResult(venues, groups,geocode);
+    }
+
+    return new Result<VenuesSearchResult>(response.getMeta(), result);
   }
 
   /**
@@ -1001,35 +1001,35 @@ public class FoursquareApi {
    *		Map<String,String> searchParams = new HashMap<String,String>();
    *		FoursquareApi foursquareApi = new FoursquareApi(<your client_id>, <your client_secret>, <your redirecturl>);
    *		searchParams.put("near", place);
-	*		searchParams.put("query", searchTerm);
-	*		searchParams.put("limit","50");
-	*		try {
-	*			Result<VenuesSearchResult> result = foursquareApi.venuesSearch(searchParams);
-	*			if(result != null) {
-	*				return Response.ok(result.getResult()).build();
-	*			}
-	*		} catch (Exception e) {
-	*			e.printStackTrace();
-	*			log.warning("Problem with foursquare search");
-	*		}
-	*		return Response.noContent().build();
-	*	}
+   *		searchParams.put("query", searchTerm);
+   *		searchParams.put("limit","50");
+   *		try {
+   *			Result<VenuesSearchResult> result = foursquareApi.venuesSearch(searchParams);
+   *			if(result != null) {
+   *				return Response.ok(result.getResult()).build();
+   *			}
+   *		} catch (Exception e) {
+   *			e.printStackTrace();
+   *			log.warning("Problem with foursquare search");
+   *		}
+   *		return Response.noContent().build();
+   *	}
    *
    */
   public Result<VenuesSearchResult> venuesSearch(Map<String,String> params) throws FoursquareApiException {
-	  List<String> argsList = new ArrayList<String>();
-	  for(String s : params.keySet()) {
-		  argsList.add(s);
-		  argsList.add(params.get(s));
-	  }
+    List<String> argsList = new ArrayList<String>();
+    for(String s : params.keySet()) {
+      argsList.add(s);
+      argsList.add(params.get(s));
+    }
 
-	  Object[] args = argsList.toArray();
-	  try {
-	      ApiRequestResponse response = doApiRequest(Method.GET, "venues/search", isAuthenticated(), args);
-	      return handleVenueSearchResult(response);
-	    } catch (JSONException e) {
-	      throw new FoursquareApiException(e);
-	    }
+    Object[] args = argsList.toArray();
+    try {
+      ApiRequestResponse response = doApiRequest(Method.GET, "venues/search", isAuthenticated(), args);
+      return handleVenueSearchResult(response);
+    } catch (JSONException e) {
+      throw new FoursquareApiException(e);
+    }
   }
 
   /**
@@ -1071,24 +1071,24 @@ public class FoursquareApi {
    *
    */
   public Result<VenuesAutocompleteResult> venuesSuggestCompletion(String ll, Double llAcc, Double alt, Double altAcc, String query, int limit) throws FoursquareApiException {
-	  try {
-	      ApiRequestResponse response = doApiRequest(Method.GET, "venues/suggestcompletion", isAuthenticated(), "ll", ll, "llAcc", llAcc, "alt", alt, "altAcc", altAcc, "query", query, "limit", limit);
-	      VenuesAutocompleteResult result = null;
+    try {
+      ApiRequestResponse response = doApiRequest(Method.GET, "venues/suggestcompletion", isAuthenticated(), "ll", ll, "llAcc", llAcc, "alt", alt, "altAcc", altAcc, "query", query, "limit", limit);
+      VenuesAutocompleteResult result = null;
 
-	      if (response.getMeta().getCode() == 200) {
-	        MiniVenue[] venues = null;
+      if (response.getMeta().getCode() == 200) {
+        MiniVenue[] venues = null;
 
-	        if (response.getResponse().has("minivenues")) {
-	          venues = (MiniVenue[]) JSONFieldParser.parseEntities(MiniVenue.class, response.getResponse().getJSONArray("minivenues"), this.skipNonExistingFields);
-	        }
+        if (response.getResponse().has("minivenues")) {
+          venues = (MiniVenue[]) JSONFieldParser.parseEntities(MiniVenue.class, response.getResponse().getJSONArray("minivenues"), this.skipNonExistingFields);
+        }
 
-	        result = new VenuesAutocompleteResult(venues);
-	      }
+        result = new VenuesAutocompleteResult(venues);
+      }
 
-	      return new Result<VenuesAutocompleteResult>(response.getMeta(), result);
-	    } catch (JSONException e) {
-	      throw new FoursquareApiException(e);
-	    }
+      return new Result<VenuesAutocompleteResult>(response.getMeta(), result);
+    } catch (JSONException e) {
+      throw new FoursquareApiException(e);
+    }
   }
 
   /**
@@ -1166,7 +1166,7 @@ public class FoursquareApi {
 
       if (response.getMeta().getCode() == 200) {
         result = (Checkin) JSONFieldParser.parseEntity(Checkin.class, response.getResponse().getJSONObject("checkin"), this.skipNonExistingFields);
-        
+
         if (response.getResponse().has("notifications")) {
           notifications = NotificationsParser.parseNotifications(response.getResponse().getJSONArray("notifications"), this.skipNonExistingFields);
         } else {

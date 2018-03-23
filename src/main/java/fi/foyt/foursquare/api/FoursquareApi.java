@@ -72,8 +72,7 @@ import fi.foyt.foursquare.api.io.Response;
  */
 public class FoursquareApi {
 
-  private static final String DEFAULT_VERSION = "20161210";
-  private static String API_URL = "https://api.foursquare.com/v2/";
+  private static final String DEFAULT_VERSION = "20140131";
 
   /**
    * Constructor.
@@ -87,16 +86,6 @@ public class FoursquareApi {
   }
 
   /**
-   * Constructor for Debug mode
-   */
-  public FoursquareApi(String clientId, String clientSecret, String redirectUrl, boolean debug) {
-    this(clientId, clientSecret, redirectUrl, new DefaultIOHandler());
-    if (debug) {
-      API_URL = "http://localhost:3000/";
-    }
-  }
-
-  /**
    * Constructor.
    *
    * @param clientId Foursquare Client id
@@ -107,7 +96,6 @@ public class FoursquareApi {
   public FoursquareApi(String clientId, String clientSecret, String redirectUrl, IOHandler ioHandler) {
     this(clientId, clientSecret, redirectUrl, null, ioHandler);
   }
-
 
   /**
    * Constructor.
@@ -143,6 +131,15 @@ public class FoursquareApi {
    */
   public void setoAuthToken(String oAuthToken) {
     this.oAuthToken = oAuthToken;
+  }
+
+  /**
+   * Set test flag for enabling Test Mode which will make the client use localhost:3000
+   *
+   * @param useTestMode set true to enable test mode
+   */
+  public void setTestMode(boolean useTestMode) {
+    this.useTestMode = useTestMode;
   }
 
   /**
@@ -1681,7 +1678,12 @@ public class FoursquareApi {
    * @throws FoursquareApiException when something unexpected happens
    */
   private String getApiRequestUrl(String path, boolean auth, Object... params) throws FoursquareApiException {
-    StringBuilder urlBuilder = new StringBuilder(apiUrl);
+    StringBuilder urlBuilder;
+    if (useTestMode) {
+      urlBuilder = new StringBuilder("http://localhost:3000/");
+    } else {
+      urlBuilder = new StringBuilder(apiUrl);
+    }
     urlBuilder.append(path);
     urlBuilder.append('?');
 
@@ -1782,7 +1784,8 @@ public class FoursquareApi {
   private IOHandler ioHandler;
   private String version = DEFAULT_VERSION;
   private boolean useCallback = true;
-  private static String apiUrl = API_URL;
+  private boolean useTestMode = false;
+  private static final String apiUrl = "https://api.foursquare.com/v2/";
 
   /**
    * Class that holds API request response
